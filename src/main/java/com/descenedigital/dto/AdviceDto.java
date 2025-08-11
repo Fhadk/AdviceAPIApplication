@@ -4,5 +4,6 @@ public record AdviceDto(
    Long id,
    String message,
    int ratingSum,
-   int ratingCount
+   int ratingCount,
+   double averageRating
 ) {}

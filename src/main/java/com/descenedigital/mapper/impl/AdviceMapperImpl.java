@@ -22,12 +22,13 @@ public class AdviceMapperImpl implements AdviceMapper {
 
     @Override
     public AdviceDto toDto(Advice advice) {
-
+        double average = advice.getRatingCount() == 0 ? 0 : (double) advice.getRatingSum() / advice.getRatingCount();
         return new AdviceDto(
                 advice.getId(),
                 advice.getMessage(),
                 advice.getRatingSum(),
-                advice.getRatingCount()
+                advice.getRatingCount(),
+                average
         );
     }
 }

@@ -28,9 +28,9 @@ public class Advice {
     @Column(name = "updated",nullable = false)
     private LocalDateTime updated;
 
-    @Column(name = "rating_sum")
+    @Column(name = "rating_sum",nullable = false)
     private int ratingSum = 0;
 
-    @Column(name = "rating_count")
+    @Column(name = "rating_count",nullable = false)
     private int ratingCount = 0;
 }

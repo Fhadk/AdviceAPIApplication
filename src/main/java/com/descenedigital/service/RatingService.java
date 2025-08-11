@@ -1,9 +1,12 @@
 package com.descenedigital.service;
 
-import com.descenedigital.dto.AdviceDto;
 import com.descenedigital.model.Advice;
 import com.descenedigital.repo.AdviceRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class RatingService {
@@ -22,6 +25,10 @@ public class RatingService {
         advice.setRatingCount(advice.getRatingCount() + 1);
 
         return adviceRepo.save(advice);
+    }
+
+    public Page<Advice> getTopRatedAdvice(Pageable pageable) {
+        return adviceRepo.findTopRated(pageable);
     }
 
 }

@@ -59,6 +59,4 @@ public class AdviceController {
         return adviceMapper.toDto(updatedAdvice);
     }
 
-
-
 }
