@@ -7,22 +7,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AdviceMapperImpl implements AdviceMapper {
+
     @Override
     public Advice fromDto(AdviceDto adviceDto) {
         return new Advice(
-                null,
+                adviceDto.id(),
                 adviceDto.message(),
                 null,
-                null
-
+                null,
+                0,
+                0
         );
     }
 
     @Override
     public AdviceDto toDto(Advice advice) {
+
         return new AdviceDto(
                 advice.getId(),
-                advice.getMessage()
+                advice.getMessage(),
+                advice.getRatingSum(),
+                advice.getRatingCount()
         );
     }
 }

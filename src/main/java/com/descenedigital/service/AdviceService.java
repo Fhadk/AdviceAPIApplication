@@ -1,12 +1,11 @@
 package com.descenedigital.service;
 
-import com.descenedigital.dto.AdviceDto;
+
 import com.descenedigital.model.Advice;
 import com.descenedigital.repo.AdviceRepo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class AdviceService {
@@ -51,7 +50,7 @@ public class AdviceService {
         return adviceRepo.save(existingAdvice);
     }
 
-    // Get a single advice by id
+    // Get single advice by id
     public Advice getAdviceById(Long id) {
         Advice advice = adviceRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Advice not found!"));

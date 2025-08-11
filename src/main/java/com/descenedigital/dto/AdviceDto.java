@@ -2,5 +2,7 @@ package com.descenedigital.dto;
 
 public record AdviceDto(
    Long id,
-   String message
+   String message,
+   int ratingSum,
+   int ratingCount
 ) {}

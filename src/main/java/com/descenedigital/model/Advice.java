@@ -27,4 +27,10 @@ public class Advice {
     @UpdateTimestamp
     @Column(name = "updated",nullable = false)
     private LocalDateTime updated;
+
+    @Column(name = "rating_sum")
+    private int ratingSum = 0;
+
+    @Column(name = "rating_count")
+    private int ratingCount = 0;
 }
