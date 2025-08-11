@@ -33,7 +33,9 @@ public class AdviceService {
                 null,
                 advice.getMessage(),
                 null,
-                null
+                null,
+                0,
+                0
         ));
     }
 
