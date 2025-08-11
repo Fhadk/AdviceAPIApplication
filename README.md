@@ -1,70 +1,67 @@
 # 🧪 Java Developer Hiring Task: Advice API Enhancement
 
-Welcome! This task is designed to evaluate your skills in Java Spring Boot development, API design, and secure application architecture. You’ll be working with a basic Advice API application and extending it based on your own technical judgment.
-
----
-
 ## 📦 Project Overview
 
-The application should include:
+This project implements an **Advice API** with:
 
-- JWT-based authentication
-- Role-based authorization (`ADMIN`, `USER`)
-- CRUD operations for an `Advice` entity
-- Paginated API responses
-- H2 in-memory database
-- Swagger/OpenAPI documentation
-
----
-
-## 📝 Your Task
-
-Your goal is to enhance and evolve the Advice API. You are free to make architectural, design, and implementation decisions as long as they align with best practices.
-
-### Suggested Areas to Explore
-
-You may choose to implement one or more of the following enhancements—or propose your own:
-
-- **User Registration Flow**  
-  Add a secure way for users to register and authenticate.
-
-- **Advice Rating System**  
-  Allow users to rate advice entries and retrieve top-rated ones.
-
-- **Advanced Pagination or Filtering**  
-  Improve the API’s usability with flexible query options.
-
-- **Role Management**  
-  Introduce role assignment or role-based access control improvements.
-
-- **DTO Mapping and Validation**  
-  Use tools like MapStruct or manual mapping to separate concerns.
-
-- **Testing Strategy**  
-  Add unit or integration tests to validate core logic.
-
-- **Swagger Improvements**  
-  Enhance API documentation with examples and descriptions.
-
-Feel free to go beyond these suggestions if you have ideas that improve the application’s usability, scalability, or maintainability.
+- **JWT-based authentication** using secure HMAC-SHA256 signing.
+- **Role-based authorization** for `ADMIN` and `USER` roles.
+- **CRUD operations** for an `Advice` entity.
+- **H2 in-memory database** for easy local setup.
+- **Swagger/OpenAPI documentation** for API exploration.
 
 ---
 
-## ✅ What We’re Looking For
+## ✨ Enhancements Implemented
 
-| Area                     | What We Value                                             |
-|--------------------------|-----------------------------------------------------------|
-| Code Quality             | Clean, readable, and maintainable code                   |
-| Spring Boot Proficiency  | Proper use of annotations, configuration, and structure  |
-| Security Awareness       | Secure handling of authentication and authorization      |
-| API Design               | RESTful principles, pagination, and documentation         |
-| Problem Solving          | Thoughtful decisions and creative solutions              |
-| Testing (Optional)       | Demonstrated understanding of testing practices          |
+### 1. **Secure JWT Authentication**
+- Implemented a secure `HS256` signing key with at least 256-bit length.
+- Configured token generation with roles embedded as claims.
+- Added token validation in request filters to secure API endpoints.
+
+### 2. **Role-Based Authorization**
+- `ADMIN` role: Can create, update, and delete advice entries.
+- `USER` role: Can view and rate advice entries.
+- Secured endpoints using `@PreAuthorize` and method-level security.
+
+### 3. **User Registration & Login**
+- Added `POST /auth/register` for secure user registration.
+- Added `POST /auth/login` for JWT token generation.
+- Passwords stored securely using `BCryptPasswordEncoder`.
+
+### 4. **Advice Rating System**
+- Users can rate advice entries.
+- Added endpoint to fetch **top-rated advice**.
+
+### 5. **Pagination & Filtering**
+- Implemented flexible pagination using Spring Data `Pageable`.
+- Added optional filtering by title or category.
+
+### 6. **DTO Mapping & Validation**
+- Introduced DTOs for requests/responses.
+- Added validation annotations (e.g., `@NotBlank`, `@Size`).
+- Mapped DTOs to entities using **MapStruct** for cleaner code.
+
+### 7. **Swagger Documentation**
+- Enhanced API docs with descriptions, examples, and authentication details.
+- Secured Swagger UI with JWT bearer token input.
+- http://localhost:8080/swagger-ui/index.html
 
 ---
 
-## 🚀 Submission Instructions
+## 🛠 Tech Stack
 
-- Please make sure to implement your enhancements.
-- Update this README.md to explain your changes and decisions.
-- Create a branch and make a pull request.
+- **Java 17**
+- **Spring Boot 3.x**
+- **Spring Security** (JWT authentication)
+- **Spring Data JPA**
+- **H2 Database**
+- **MapStruct**
+- **Swagger / Springdoc OpenAPI**
+
+---
+
+## 🚀 How to Run
+
+### 1. Clone the Repository
+### 2. mvn spring-boot:run
