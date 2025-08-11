@@ -3,7 +3,9 @@ package com.descenedigital.mapper.impl;
 import com.descenedigital.dto.AdviceDto;
 import com.descenedigital.mapper.AdviceMapper;
 import com.descenedigital.model.Advice;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AdviceMapperImpl implements AdviceMapper {
     @Override
     public Advice fromDto(AdviceDto adviceDto) {
