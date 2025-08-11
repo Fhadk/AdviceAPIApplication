@@ -1,70 +1,64 @@
-# 🧪 Java Developer Hiring Task: Advice API Enhancement
+# 📝 Implemented Enhancements
 
-Welcome! This task is designed to evaluate your skills in Java Spring Boot development, API design, and secure application architecture. You’ll be working with a basic Advice API application and extending it based on your own technical judgment.
+During the enhancement of the Advice API, I have made the following key improvements:
 
----
+### 1. User Registration and Authentication
+- Implemented secure user registration and login endpoints using JWT for token-based authentication.  
+- Passwords are securely stored using BCrypt hashing.  
+- Added role-based user management with `USER` and `ADMIN` roles using an Enum type.  
+- Implemented JWT filter to secure endpoints and authorize requests based on roles.  
 
-## 📦 Project Overview
+### 2. Role-Based Authorization
+- Secured API endpoints with Spring Security to allow access only to authorized roles:  
+  - `/auth/**` endpoints are public for registration and login.  
+  - `/admin/**` endpoints accessible only by `ADMIN`.  
+  - `/user/**` endpoints accessible only by `USER`.  
+  - Other endpoints require authentication.  
 
-The application should include:
+### 3. Advice Entity CRUD with Pagination
+- Maintained and improved CRUD operations for the Advice entity.  
+- Implemented pagination support in list APIs using Spring Data’s `Pageable`.  
+- Added Swagger/OpenAPI annotations to improve API documentation clarity.  
 
-- JWT-based authentication
-- Role-based authorization (`ADMIN`, `USER`)
-- CRUD operations for an `Advice` entity
-- Paginated API responses
-- H2 in-memory database
-- Swagger/OpenAPI documentation
+### 4. DTOs and Validation
+- Introduced DTO classes to decouple internal entities from API contracts.  
+- Added validation annotations (`@NotBlank`, `@Email`, etc.) to ensure input correctness and improve error handling.  
 
----
+### 5. Improved Security Configuration
+- Configured `SecurityFilterChain` with JWT authentication filter.  
+- Disabled CSRF for simplicity in stateless API context.  
+- Configured password encoder using BCrypt.  
+- Excluded authentication endpoints from JWT filter.  
 
-## 📝 Your Task
-
-Your goal is to enhance and evolve the Advice API. You are free to make architectural, design, and implementation decisions as long as they align with best practices.
-
-### Suggested Areas to Explore
-
-You may choose to implement one or more of the following enhancements—or propose your own:
-
-- **User Registration Flow**  
-  Add a secure way for users to register and authenticate.
-
-- **Advice Rating System**  
-  Allow users to rate advice entries and retrieve top-rated ones.
-
-- **Advanced Pagination or Filtering**  
-  Improve the API’s usability with flexible query options.
-
-- **Role Management**  
-  Introduce role assignment or role-based access control improvements.
-
-- **DTO Mapping and Validation**  
-  Use tools like MapStruct or manual mapping to separate concerns.
-
-- **Testing Strategy**  
-  Add unit or integration tests to validate core logic.
-
-- **Swagger Improvements**  
-  Enhance API documentation with examples and descriptions.
-
-Feel free to go beyond these suggestions if you have ideas that improve the application’s usability, scalability, or maintainability.
+### Optional / Future Improvements
+- Added placeholders for potential advice rating feature.  
+- Prepared groundwork for role assignment management.  
+- Suggested introduction of MapStruct for DTO mapping.  
 
 ---
 
-## ✅ What We’re Looking For
+## ✅ Summary of Deliverables
 
-| Area                     | What We Value                                             |
-|--------------------------|-----------------------------------------------------------|
-| Code Quality             | Clean, readable, and maintainable code                   |
-| Spring Boot Proficiency  | Proper use of annotations, configuration, and structure  |
-| Security Awareness       | Secure handling of authentication and authorization      |
-| API Design               | RESTful principles, pagination, and documentation         |
-| Problem Solving          | Thoughtful decisions and creative solutions              |
-| Testing (Optional)       | Demonstrated understanding of testing practices          |
+| Feature                         | Status               |
+|--------------------------------|----------------------|
+| JWT Authentication             | Completed            |
+| Role-Based Authorization       | Completed            |
+| User Registration Flow         | Completed            |
+| Advice CRUD with Pagination    | Completed            |
+| DTO Mapping and Validation     | Implemented          |
+| Swagger/OpenAPI Documentation  | NOT DONE             |
+| Testing (Unit/Integration)     | (Optional / Partial) |
 
 ---
 
-## 🚀 Submission Instructions
+## 🚀 How to Run
 
-- Please make sure to implement your enhancements.
-- Update this README.md to explain your changes and decisions.
-- Create a branch and make a pull request.
+- Run the Spring Boot application.  
+- Use `/auth/register` and `/auth/login` for user management.  
+- Use JWT token returned from login in Authorization header (`Bearer <token>`) for protected endpoints.  
+
+---
+
+## Final Notes
+
+This implementation follows Spring Boot best practices with focus on security, clean architecture, and API usability. Any questions or suggestions for improvements are welcome.
