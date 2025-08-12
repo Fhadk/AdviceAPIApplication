@@ -1,15 +1,14 @@
 package com.descenedigital.controller;
 
-
 import com.descenedigital.model.User;
 import com.descenedigital.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@Tag(name = "User API", description = "User registration and authentication")
 @RestController
 public class UserController {
 
@@ -19,19 +18,19 @@ public class UserController {
         this.userService = userService;
     }
 
+    @Operation(summary = "Register a new user")
     @PostMapping("/register")
-    public User register(@RequestBody User user){
+    public User register(
+            @Parameter(description = "User details", required = true)
+            @Valid @RequestBody User user) {
         return userService.registerUser(user);
-
     }
 
+    @Operation(summary = "Login a user and receive JWT token")
     @PostMapping("/login")
-    public String login(@RequestBody User user){
+    public String login(
+            @Parameter(description = "User credentials", required = true)
+            @Valid @RequestBody User user) {
         return userService.verify(user);
-    }
-
-    @GetMapping("/users")
-    public List<User> checkUsers(){
-        return userService.getUsers();
     }
 }

@@ -1,7 +1,7 @@
 package com.descenedigital.config;
 
-import com.descenedigital.service.JwtService;           // Adjust package if needed
-import com.descenedigital.service.MyUserDetailsService; // Adjust package if needed
+import com.descenedigital.service.JwtService;
+import com.descenedigital.service.MyUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

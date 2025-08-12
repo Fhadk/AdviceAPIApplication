@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class AdviceService {
@@ -17,9 +16,12 @@ public class AdviceService {
         this.adviceRepo = adviceRepo;
     }
 
-    // Get all advices
-    public List<Advice> ListOfAdvices() {
-        return adviceRepo.findAll();
+    // Get all advices with pagination and filtering
+    public Page<Advice> getAdviceFiltered(String keyword, Pageable pageable) {
+        if (keyword == null || keyword.isBlank()) {
+            return adviceRepo.findAll(pageable);
+        }
+        return adviceRepo.findByMessageContainingIgnoreCase(keyword, pageable);
     }
 
     // Post an advice
@@ -59,14 +61,5 @@ public class AdviceService {
         Advice advice = adviceRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Advice not found!"));
         return advice;
-    }
-
-    // Pagination and filtering
-
-    public Page<Advice> getAdviceFiltered(String keyword, Pageable pageable) {
-        if (keyword == null || keyword.isBlank()) {
-            return adviceRepo.findAll(pageable);
-        }
-        return adviceRepo.findByMessageContainingIgnoreCase(keyword, pageable);
     }
 }

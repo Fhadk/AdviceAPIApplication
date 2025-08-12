@@ -12,7 +12,7 @@ public record AdviceDto(
 
         int ratingCount,
 
-        @Schema(description = "Average rating", example = "")  // Empty example disables default
+        @Schema(description = "Average rating", example = "0.0")
         double averageRating
 ) {}
 
