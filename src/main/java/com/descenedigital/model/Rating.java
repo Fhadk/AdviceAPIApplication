@@ -9,36 +9,33 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "advice")
-public class Advice {
+@Table(name = "ratings", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"user_id", "advice_id"})
+})
+public class Rating {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 1000)
-    private String message;
-
-    @Column(nullable = false, length = 100)
-    private String title;
-
-    @Column(length = 500)
-    private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id", nullable = false)
-    private User author;
+    @JoinColumn(name = "advice_id", nullable = false)
+    private Advice advice;
+
+    @Column(nullable = false)
+    private Integer rating; // 1-5 stars
+
+    @Column(length = 500)
+    private String comment;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Column(name = "average_rating")
-    private Double averageRating = 0.0;
-
-    @Column(name = "rating_count")
-    private Integer ratingCount = 0;
 
     @PrePersist
     protected void onCreate() {

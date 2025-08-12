@@ -1,27 +1,16 @@
 package com.descenedigital;
 
-import com.descenedigital.model.Advice;
-import com.descenedigital.repo.AdviceRepo;
-import com.descenedigital.service.AdviceService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
-import java.util.*;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-
+@SpringBootTest
+@ActiveProfiles("test")
 class AdviceApiApplicationTests {
-		@Mock
-		private AdviceRepo adviceRepository;
 
-		@InjectMocks
-		private AdviceService adviceService;
-
-		@BeforeEach
-		void setUp() {
-			MockitoAnnotations.openMocks(this);
-		}
+	@Test
+	void contextLoads() {
+		// This test ensures that the Spring context loads successfully
+	}
 }
 
