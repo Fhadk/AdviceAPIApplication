@@ -1,0 +1,44 @@
+### Register
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "user1@example.com",
+  "password": "Password@123"
+}
+
+### Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user1@example.com",
+  "password": "Password@123"
+}
+
+### Create advice
+POST http://localhost:8080/api/advice
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "title": "Stay hydrated",
+  "text": "Drink water regularly",
+  "category": "health"
+}
+
+### Rate advice
+POST http://localhost:8080/api/advice/1/rate
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "rating": 5
+}
+
+### Search
+GET http://localhost:8080/api/advice/search?q=water&category=health&page=0&size=10&sort=createdAt,DESC
+
+### Top rated
+GET http://localhost:8080/api/advice/top-rated?page=0&size=10
+
