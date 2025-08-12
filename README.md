@@ -68,3 +68,28 @@ Feel free to go beyond these suggestions if you have ideas that improve the appl
 - Please make sure to implement your enhancements.
 - Update this README.md to explain your changes and decisions.
 - Create a branch and make a pull request.
+
+##  Project Contains ##
+- JWT-based authentication
+Get JWT token from default user names and passwords for admin and user i.e. 
+username= admin & password = admin123, username = user & password = user123
+using secure HMAC-SHA256 signing.
+
+This JWT token is used to access certain tasks.
+- Role-based authorization (`ADMIN`, `USER`)
+ADMIN is able to Create, update, get and delete all advices and ratings.
+USER is able to get all advice, ratings and top ratings and add ratings.
+
+- CRUD operations for an `Advice` entity
+- Paginated API responses
+- H2 in-memory database
+- Swagger/OpenAPI documentation
+- Advice Rating System  
+  Allows users to rate advice entries using /api/advice/{id}/rating
+  and retrieve top-rated ones using /api/auth/toprated.
+- DTO Mapping and Validation 
+  Contains DTO for Advice and Rating
+  Used tools like MapStruct or manual mapping to separate concerns.
+
+
+
