@@ -16,4 +16,6 @@ public interface AdviceRepo extends JpaRepository<Advice, Long> {
         ORDER BY (a.ratingSum * 1.0 / a.ratingCount) DESC
         """)
     Page<Advice> findTopRated(Pageable pageable);
+
+    Page<Advice> findByMessageContainingIgnoreCase(String keyword, Pageable pageable);
 }

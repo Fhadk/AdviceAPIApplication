@@ -3,6 +3,8 @@ package com.descenedigital.service;
 
 import com.descenedigital.model.Advice;
 import com.descenedigital.repo.AdviceRepo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -57,5 +59,14 @@ public class AdviceService {
         Advice advice = adviceRepo.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Advice not found!"));
         return advice;
+    }
+
+    // Pagination and filtering
+
+    public Page<Advice> getAdviceFiltered(String keyword, Pageable pageable) {
+        if (keyword == null || keyword.isBlank()) {
+            return adviceRepo.findAll(pageable);
+        }
+        return adviceRepo.findByMessageContainingIgnoreCase(keyword, pageable);
     }
 }
