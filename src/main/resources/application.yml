@@ -7,6 +7,8 @@ spring:
   h2:
     console:
       enabled: true
+  jwt:
+    secret: "qqPe5S/7kiCllG/wsbwnVh+VUlU4V01zD5OI6gdEDke0zTLons1wSVpj7bd8yGi5"
   jpa:
     hibernate:
       ddl-auto: update
