@@ -42,6 +42,19 @@ This project enhances the Advice API with secure authentication, user interactio
 - Java 17+
 - Maven Wrapper (included in the project)
 
+## Accessing the Application
+
+- **H2 Database Console:**  
+  Open your browser and go to:  
+  `http://localhost:8080/h2-console`  
+  Use JDBC URL: `jdbc:h2:mem:advice-db`  
+  Username: `sa`  
+  Leave password blank.
+
+- **Swagger UI for API Documentation and Testing:**  
+  Access the API docs and interactive UI at:  
+  `http://localhost:8080/swagger-ui/index.html`
+
 ### Build and Run
 
 1. **Build the project:**
