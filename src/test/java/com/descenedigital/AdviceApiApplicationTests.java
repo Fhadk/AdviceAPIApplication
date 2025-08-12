@@ -1,7 +1,7 @@
 package com.descenedigital;
 
 import com.descenedigital.model.Advice;
-import com.descenedigital.repo.AdviceRepo;
+import com.descenedigital.repo.AdviceRepository;
 import com.descenedigital.service.AdviceService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import static org.mockito.Mockito.*;
 
 class AdviceApiApplicationTests {
 		@Mock
-		private AdviceRepo adviceRepository;
+		private AdviceRepository adviceRepository;
 
 		@InjectMocks
 		private AdviceService adviceService;

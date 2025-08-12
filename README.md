@@ -68,3 +68,24 @@ Feel free to go beyond these suggestions if you have ideas that improve the appl
 - Please make sure to implement your enhancements.
 - Update this README.md to explain your changes and decisions.
 - Create a branch and make a pull request.
+
+
+# Advice API (Spring Boot)
+
+This project implements an Advice API with JWT-based authentication, role-based authorization (ADMIN, USER), Advice CRUD, ratings, pagination, H2 in-memory DB, and OpenAPI docs.
+
+## How to run
+1. Ensure Java 17 and Maven are installed.
+2. `mvn spring-boot:run`
+3. Open H2 console: http://localhost:8080/h2-console (JDBC URL: `jdbc:h2:mem:advice-db`)
+4. Open Swagger UI: http://localhost:8080/swagger-ui/index.html
+
+## Initial accounts
+- admin / adminpass (ROLE_ADMIN + ROLE_USER)
+- user / userpass (ROLE_USER)
+
+## Notes
+- JWT secret is stored in `application.yml` for demo only. Replace for production.
+- Roles stored as enum set on the user.
+- Rating endpoint prevents duplicate ratings by updating existing rating by the same user.
+- Suggestions to extend: add DTO mappers, MapStruct, more tests, role management endpoints.
