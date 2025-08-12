@@ -91,5 +91,15 @@ USER is able to get all advice, ratings and top ratings and add ratings.
   Contains DTO for Advice and Rating
   Used tools like MapStruct or manual mapping to separate concerns.
 
+HOW TO RUN:
 
-
+- Clone the repository 
+- mvn clean install
+- mvn spring-boot:run
+- Go to http://localhost:8080/api/auth/login and add credentials 
+- username= admin & password = admin123 --> for admin, username = user & password = user123 --> for User 
+  to get JWT Bearer Token
+- To Access Swagger UI http://localhost:8080/swagger-ui/index.html
+- Select Authorize option in Swagger and paste token or Open Postman and 
+ go to authorization tab and select Bearer and paste JWT Token. 
+- Run the commands according to user roles.
