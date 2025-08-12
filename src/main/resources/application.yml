@@ -7,11 +7,34 @@ spring:
   h2:
     console:
       enabled: true
+      path: /h2-console
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        format_sql: true
 
 server:
   port: 8080
+
+app:
+  jwt:
+    secret: dGhpc0lzQVZlcnlMb25nQW5kU2VjdXJlSldUU2VjcmV0S2V5Rm9yQWR2aWNlQVBJQXBwbGljYXRpb25UaGF0SXNMb25nRW5vdWdoRm9ySE1BQ1NIQTI1NkFsZ29yaXRobQ==
+    expiration: 86400000 # 24 hours in milliseconds
+
+logging:
+  level:
+    com.descenedigital: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
