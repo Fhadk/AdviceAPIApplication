@@ -68,3 +68,55 @@ Feel free to go beyond these suggestions if you have ideas that improve the appl
 - Please make sure to implement your enhancements.
 - Update this README.md to explain your changes and decisions.
 - Create a branch and make a pull request.
+
+---
+
+## ✅ Implemented Enhancements
+
+- Authentication & Authorization using JWT with roles `ADMIN` and `USER`
+- CRUD endpoints for `Advice` with pagination
+- Validation on inputs (`@NotBlank`, max length)
+- H2 in-memory DB configured; console enabled
+- Swagger/OpenAPI UI available at `/swagger-ui.html`
+- User registration and login endpoints
+- Method-level security restricting create/update/delete to `ADMIN`
+- Unit tests for service layer and controller using MockMvc
+
+## 🔐 Auth Endpoints
+
+- POST `/api/auth/register` body: `{ "username": "u", "password": "p", "admin": false }`
+  - returns `{ token }`
+- POST `/api/auth/login` body: `{ "username": "u", "password": "p" }`
+  - returns `{ token }`
+- Use `Authorization: Bearer <token>` header for protected routes.
+
+## 💡 Advice Endpoints
+
+- GET `/api/advice` with pagination params `page`, `size`, `sort`
+- GET `/api/advice/{id}`
+- POST `/api/advice` (ADMIN)
+- PUT `/api/advice/{id}` (ADMIN)
+- DELETE `/api/advice/{id}` (ADMIN)
+
+## 🧰 Run & Test
+
+```bash
+mvn clean test
+mvn spring-boot:run
+```
+
+H2 Console: `/h2-console` (JDBC URL: `jdbc:h2:mem:advice-db`, user `sa`, blank password)
+
+Swagger UI: `/swagger-ui.html`
+
+## 🧪 Testing Strategy
+
+- Unit tests for `AdviceService` CRUD
+- Slice tests for `AdviceController` using MockMvc + JWT
+- Minimal auth flow smoke test
+
+## 🧭 Notes on Design Decisions
+
+- Stateless JWT auth with a short-lived token (1h)
+- Roles prefixed with `ROLE_` for Spring Security
+- Validation annotations to keep entity constraints simple
