@@ -1,64 +1,140 @@
-# 📝 Implemented Enhancements
+# 📌 Advice API – Enhanced Version
 
-During the enhancement of the Advice API, I have made the following key improvements:
+A **Spring Boot REST API** for managing advice entries with **JWT authentication, role-based authorization, Swagger documentation, and test coverage**.
 
-### 1. User Registration and Authentication
-- Implemented secure user registration and login endpoints using JWT for token-based authentication.  
-- Passwords are securely stored using BCrypt hashing.  
-- Added role-based user management with `USER` and `ADMIN` roles using an Enum type.  
-- Implemented JWT filter to secure endpoints and authorize requests based on roles.  
+---
 
-### 2. Role-Based Authorization
-- Secured API endpoints with Spring Security to allow access only to authorized roles:  
-  - `/auth/**` endpoints are public for registration and login.  
-  - `/admin/**` endpoints accessible only by `ADMIN`.  
-  - `/user/**` endpoints accessible only by `USER`.  
-  - Other endpoints require authentication.  
+## 🆕 Key Enhancements
 
-### 3. Advice Entity CRUD with Pagination
-- Maintained and improved CRUD operations for the Advice entity.  
-- Implemented pagination support in list APIs using Spring Data’s `Pageable`.  
-- Added Swagger/OpenAPI annotations to improve API documentation clarity.  
+### 1. **User Registration & Authentication**
 
-### 4. DTOs and Validation
-- Introduced DTO classes to decouple internal entities from API contracts.  
-- Added validation annotations (`@NotBlank`, `@Email`, etc.) to ensure input correctness and improve error handling.  
+* Secure **JWT-based authentication** for login and registration.
+* Passwords stored using **BCrypt hashing**.
+* Role-based user management (`USER` and `ADMIN` via Enum).
+* Integrated **JWT filter** for securing endpoints based on user roles.
+* `jwt.secret` moved to `application.properties` for **better security**.
 
-### 5. Improved Security Configuration
-- Configured `SecurityFilterChain` with JWT authentication filter.  
-- Disabled CSRF for simplicity in stateless API context.  
-- Configured password encoder using BCrypt.  
-- Excluded authentication endpoints from JWT filter.  
+### 2. **Role-Based Authorization**
 
-### Optional / Future Improvements
-- Added placeholders for potential advice rating feature.  
-- Prepared groundwork for role assignment management.  
-- Suggested introduction of MapStruct for DTO mapping.  
+* **Spring Security** rules:
+
+  * `/auth/**` → Public (register/login)
+  * `/api/advice/admin/**` → `ADMIN` only
+  * `/api/advice/**` → `USER` or `ADMIN`
+* Fine-grained access control with `@PreAuthorize`.
+
+### 3. **Advice CRUD with Pagination & Ratings**
+
+* Full CRUD for **Advice** entity.
+* **Pagination** via `Pageable`.
+* **Rating** feature for advice.
+* Proper HTTP status codes:
+
+  * `201 CREATED`
+  * `200 OK`
+  * `404 NOT FOUND`
+  * `403 FORBIDDEN`
+
+### 4. **Swagger / OpenAPI Documentation**
+
+* Integrated **Springdoc OpenAPI**.
+* Auto-generated API docs with test capability.
+* Swagger UI:
+  [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+### 5. **DTOs & Validation**
+
+* **DTO classes** to separate entities from API contracts.
+* Validation annotations:
+
+  * `@NotBlank`
+  * `@Email`
+  * `@Size`
+* Improved error handling with meaningful messages.
+
+### 6. **Security Improvements**
+
+* `jwt.secret` stored in `application.properties` (no hardcoding).
+* Disabled CSRF for stateless REST API.
+* Configured **BCryptPasswordEncoder**.
+* Excluded public endpoints from JWT filter.
+
+### 7. **Testing**
+
+* Unit tests for:
+
+  * `AuthController` (registration & login flow)
+  * `AdviceController` (CRUD, rating, pagination)
+* **Mockito** for mocking.
+* Verified HTTP response codes and expected responses.
 
 ---
 
 ## ✅ Summary of Deliverables
 
-| Feature                         | Status               |
-|--------------------------------|----------------------|
-| JWT Authentication             | Completed            |
-| Role-Based Authorization       | Completed            |
-| User Registration Flow         | Completed            |
-| Advice CRUD with Pagination    | Completed            |
-| DTO Mapping and Validation     | Implemented          |
-| Swagger/OpenAPI Documentation  | NOT DONE             |
-| Testing (Unit/Integration)     | (Optional / Partial) |
+| Feature                         | Status      |
+| ------------------------------- | ----------- |
+| JWT Authentication              | ✅ Completed |
+| Role-Based Authorization        | ✅ Completed |
+| User Registration Flow          | ✅ Completed |
+| Advice CRUD with Pagination     | ✅ Completed |
+| Advice Rating Feature           | ✅ Completed |
+| Swagger/OpenAPI Documentation   | ✅ Completed |
+| Secure JWT Secret in Properties | ✅ Completed |
+| HTTP Response Codes Everywhere  | ✅ Completed |
+| Unit Tests                      | ✅ Completed |
 
 ---
 
 ## 🚀 How to Run
 
-- Run the Spring Boot application.  
-- Use `/auth/register` and `/auth/login` for user management.  
-- Use JWT token returned from login in Authorization header (`Bearer <token>`) for protected endpoints.  
+### **1. Clone the Repository**
 
----
+```bash
+git clone https://github.com/wajihabdullah/AdviceAPIApplication.git
+cd AdviceAPIApplication
+```
 
-## Final Notes
+### **2. Build & Run**
 
-This implementation follows Spring Boot best practices with focus on security, clean architecture, and API usability. Any questions or suggestions for improvements are welcome.
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+### **3. Access the API**
+
+```bash
+Swagger UI → http://localhost:8080/swagger-ui/index.html
+```
+
+### **4. Auth Flow**
+
+```bash
+# Register
+POST /auth/register
+
+# Login (returns JWT token)
+POST /auth/login
+Response:
+{
+  "token": "your.jwt.token"
+}
+
+# Use token in Authorization header for protected endpoints
+Authorization: Bearer your.jwt.token
+```
+
+### **5. Running Tests**
+
+```bash
+mvn test
+```
+
+**Tests Include:**
+
+* User registration & login
+* JWT token validation
+* Advice CRUD & rating
+* Role-based access verification
+

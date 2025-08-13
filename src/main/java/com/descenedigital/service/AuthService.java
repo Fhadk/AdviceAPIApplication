@@ -41,4 +41,8 @@ public class AuthService {
 
         return jwtService.generateToken(user);
     }
+
+    public boolean existsByUsername(String username) {
+        return userRepository.findByUsername(username).isPresent();
+    }
 }

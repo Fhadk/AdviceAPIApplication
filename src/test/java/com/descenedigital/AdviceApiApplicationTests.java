@@ -1,5 +1,8 @@
 package com.descenedigital;
 
+import com.descenedigital.controller.AdviceController;
+import com.descenedigital.controller.AdviceControllerTests;
+import com.descenedigital.controller.AuthController;
 import com.descenedigital.model.Advice;
 import com.descenedigital.repo.AdviceRepo;
 import com.descenedigital.service.AdviceService;
@@ -21,7 +24,7 @@ class AdviceApiApplicationTests {
 
 		@BeforeEach
 		void setUp() {
-			MockitoAnnotations.openMocks(this);
+			MockitoAnnotations.openMocks(AdviceControllerTests.class);
 		}
 }
 
