@@ -42,8 +42,32 @@ This project reflects my commitment to quality and best practices, and I’m exc
 
 ### 4. Swagger/OpenAPI Documentation
 
-* Enhanced all controllers with detailed Swagger annotations for methods, parameters, response codes, and security constraints.
-* Grouped endpoints logically with `@Tag` and provided clear descriptions for better developer experience.
+I have integrated Swagger into this application using the springdoc-openapi-starter-webmvc-ui dependency.
+This allows me to automatically generate interactive API documentation.
+* Annotated Controllers and Endpoints using @Operation and @ApiResponses from the io.swagger.v3.oas.annotations package.
+  These annotations help Swagger generate detailed descriptions, request/response examples, and HTTP status codes in the UI.
+* Updated Security Configuration to temporarily allow public access to Swagger endpoints (for review purposes only)
+* Swagger UI URL: http://localhost:8080/swagger-ui/index.html
+
+-- How to Access Swagger
+You can run and view Swagger as follows:
+* Check out my branch from the pull request:
+git fetch origin pull/13/head:Hamdia-Nouman
+git checkout Hamdia-Nouman
+
+* Build and run the application:
+mvn clean install
+mvn spring-boot:run
+
+* Open Swagger UI in your browser:
+http://localhost:8080/swagger-ui/index.html
+
+You will see all available endpoints, their request/response details, and you can test them directly from the browser.
+
+Right now, Swagger is public in my application so that the reviewer can test the API without authentication.
+In a real-world scenerio, I would:
+*Restrict Swagger access to ADMIN.
+*Or make it available only in development and test environments.
 
 *Reasoning:* Good documentation is essential for API adoption and maintenance, reducing onboarding friction for frontend or external developers.
 
