@@ -1,70 +1,140 @@
-# 🧪 Java Developer Hiring Task: Advice API Enhancement
+# 📌 Advice API – Enhanced Version
 
-Welcome! This task is designed to evaluate your skills in Java Spring Boot development, API design, and secure application architecture. You’ll be working with a basic Advice API application and extending it based on your own technical judgment.
-
----
-
-## 📦 Project Overview
-
-The application should include:
-
-- JWT-based authentication
-- Role-based authorization (`ADMIN`, `USER`)
-- CRUD operations for an `Advice` entity
-- Paginated API responses
-- H2 in-memory database
-- Swagger/OpenAPI documentation
+A **Spring Boot REST API** for managing advice entries with **JWT authentication, role-based authorization, Swagger documentation, and test coverage**.
 
 ---
 
-## 📝 Your Task
+## 🆕 Key Enhancements
 
-Your goal is to enhance and evolve the Advice API. You are free to make architectural, design, and implementation decisions as long as they align with best practices.
+### 1. **User Registration & Authentication**
 
-### Suggested Areas to Explore
+* Secure **JWT-based authentication** for login and registration.
+* Passwords stored using **BCrypt hashing**.
+* Role-based user management (`USER` and `ADMIN` via Enum).
+* Integrated **JWT filter** for securing endpoints based on user roles.
+* `jwt.secret` moved to `application.properties` for **better security**.
 
-You may choose to implement one or more of the following enhancements—or propose your own:
+### 2. **Role-Based Authorization**
 
-- **User Registration Flow**  
-  Add a secure way for users to register and authenticate.
+* **Spring Security** rules:
 
-- **Advice Rating System**  
-  Allow users to rate advice entries and retrieve top-rated ones.
+  * `/auth/**` → Public (register/login)
+  * `/api/advice/admin/**` → `ADMIN` only
+  * `/api/advice/**` → `USER` or `ADMIN`
+* Fine-grained access control with `@PreAuthorize`.
 
-- **Advanced Pagination or Filtering**  
-  Improve the API’s usability with flexible query options.
+### 3. **Advice CRUD with Pagination & Ratings**
 
-- **Role Management**  
-  Introduce role assignment or role-based access control improvements.
+* Full CRUD for **Advice** entity.
+* **Pagination** via `Pageable`.
+* **Rating** feature for advice.
+* Proper HTTP status codes:
 
-- **DTO Mapping and Validation**  
-  Use tools like MapStruct or manual mapping to separate concerns.
+  * `201 CREATED`
+  * `200 OK`
+  * `404 NOT FOUND`
+  * `403 FORBIDDEN`
 
-- **Testing Strategy**  
-  Add unit or integration tests to validate core logic.
+### 4. **Swagger / OpenAPI Documentation**
 
-- **Swagger Improvements**  
-  Enhance API documentation with examples and descriptions.
+* Integrated **Springdoc OpenAPI**.
+* Auto-generated API docs with test capability.
+* Swagger UI:
+  [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-Feel free to go beyond these suggestions if you have ideas that improve the application’s usability, scalability, or maintainability.
+### 5. **DTOs & Validation**
+
+* **DTO classes** to separate entities from API contracts.
+* Validation annotations:
+
+  * `@NotBlank`
+  * `@Email`
+  * `@Size`
+* Improved error handling with meaningful messages.
+
+### 6. **Security Improvements**
+
+* `jwt.secret` stored in `application.properties` (no hardcoding).
+* Disabled CSRF for stateless REST API.
+* Configured **BCryptPasswordEncoder**.
+* Excluded public endpoints from JWT filter.
+
+### 7. **Testing**
+
+* Unit tests for:
+
+  * `AuthController` (registration & login flow)
+  * `AdviceController` (CRUD, rating, pagination)
+* **Mockito** for mocking.
+* Verified HTTP response codes and expected responses.
 
 ---
 
-## ✅ What We’re Looking For
+## ✅ Summary of Deliverables
 
-| Area                     | What We Value                                             |
-|--------------------------|-----------------------------------------------------------|
-| Code Quality             | Clean, readable, and maintainable code                   |
-| Spring Boot Proficiency  | Proper use of annotations, configuration, and structure  |
-| Security Awareness       | Secure handling of authentication and authorization      |
-| API Design               | RESTful principles, pagination, and documentation         |
-| Problem Solving          | Thoughtful decisions and creative solutions              |
-| Testing (Optional)       | Demonstrated understanding of testing practices          |
+| Feature                         | Status      |
+| ------------------------------- | ----------- |
+| JWT Authentication              | ✅ Completed |
+| Role-Based Authorization        | ✅ Completed |
+| User Registration Flow          | ✅ Completed |
+| Advice CRUD with Pagination     | ✅ Completed |
+| Advice Rating Feature           | ✅ Completed |
+| Swagger/OpenAPI Documentation   | ✅ Completed |
+| Secure JWT Secret in Properties | ✅ Completed |
+| HTTP Response Codes Everywhere  | ✅ Completed |
+| Unit Tests                      | ✅ Completed |
 
 ---
 
-## 🚀 Submission Instructions
+## 🚀 How to Run
 
-- Please make sure to implement your enhancements.
-- Update this README.md to explain your changes and decisions.
-- Create a branch and make a pull request.
+### **1. Clone the Repository**
+
+```bash
+git clone https://github.com/wajihabdullah/AdviceAPIApplication.git
+cd AdviceAPIApplication
+```
+
+### **2. Build & Run**
+
+```bash
+mvn clean install
+mvn spring-boot:run
+```
+
+### **3. Access the API**
+
+```bash
+Swagger UI → http://localhost:8080/swagger-ui/index.html
+```
+
+### **4. Auth Flow**
+
+```bash
+# Register
+POST /auth/register
+
+# Login (returns JWT token)
+POST /auth/login
+Response:
+{
+  "token": "your.jwt.token"
+}
+
+# Use token in Authorization header for protected endpoints
+Authorization: Bearer your.jwt.token
+```
+
+### **5. Running Tests**
+
+```bash
+mvn test
+```
+
+**Tests Include:**
+
+* User registration & login
+* JWT token validation
+* Advice CRUD & rating
+* Role-based access verification
+
