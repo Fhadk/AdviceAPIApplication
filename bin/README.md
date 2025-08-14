@@ -1,70 +1,23 @@
-# 🧪 Java Developer Hiring Task: Advice API Enhancement
+## Access Rules
 
-Welcome! This task is designed to evaluate your skills in Java Spring Boot development, API design, and secure application architecture. You’ll be working with a basic Advice API application and extending it based on your own technical judgment.
+### Authentication
+- **Public**:
+  - `/api/auth/login` → Any user can log in using username & password.
+  - `/api/auth/public/register` → Anyone can register as a normal user (ROLE_USER). Cannot set their own role.
+- **Admin**:
+  - `/api/auth/register` → Admin can create new users with any role (ROLE_USER or ROLE_ADMIN).
+  - Note: In this version, `/api/auth/register` has no restriction for testing purposes, but ideally only Admin should have access.
 
----
+### Advice Management
+- **Create Advice**: Only ADMIN can create new advice entries.
+- **Update/Delete Advice**: Only ADMIN can update or delete advice.
+- **View Advice**: Both USER and ADMIN can view advice paginated and toprated.
+- **Rate Advice**:
+  - Users can rate any advice.
+  - ADMIN cannot rate their own advice.
 
-## 📦 Project Overview
-
-The application should include:
-
-- JWT-based authentication
-- Role-based authorization (`ADMIN`, `USER`)
-- CRUD operations for an `Advice` entity
-- Paginated API responses
-- H2 in-memory database
-- Swagger/OpenAPI documentation
-
----
-
-## 📝 Your Task
-
-Your goal is to enhance and evolve the Advice API. You are free to make architectural, design, and implementation decisions as long as they align with best practices.
-
-### Suggested Areas to Explore
-
-You may choose to implement one or more of the following enhancements—or propose your own:
-
-- **User Registration Flow**  
-  Add a secure way for users to register and authenticate.
-
-- **Advice Rating System**  
-  Allow users to rate advice entries and retrieve top-rated ones.
-
-- **Advanced Pagination or Filtering**  
-  Improve the API’s usability with flexible query options.
-
-- **Role Management**  
-  Introduce role assignment or role-based access control improvements.
-
-- **DTO Mapping and Validation**  
-  Use tools like MapStruct or manual mapping to separate concerns.
-
-- **Testing Strategy**  
-  Add unit or integration tests to validate core logic.
-
-- **Swagger Improvements**  
-  Enhance API documentation with examples and descriptions.
-
-Feel free to go beyond these suggestions if you have ideas that improve the application’s usability, scalability, or maintainability.
-
----
-
-## ✅ What We’re Looking For
-
-| Area                     | What We Value                                             |
-|--------------------------|-----------------------------------------------------------|
-| Code Quality             | Clean, readable, and maintainable code                   |
-| Spring Boot Proficiency  | Proper use of annotations, configuration, and structure  |
-| Security Awareness       | Secure handling of authentication and authorization      |
-| API Design               | RESTful principles, pagination, and documentation         |
-| Problem Solving          | Thoughtful decisions and creative solutions              |
-| Testing (Optional)       | Demonstrated understanding of testing practices          |
-
----
-
-## 🚀 Submission Instructions
-
-- Please make sure to implement your enhancements.
-- Update this README.md to explain your changes and decisions.
-- Create a branch and make a pull request.
+### User Management
+- **View Users List**: Only ADMIN can see the list of all users.
+- **Get User by ID**: Only ADMIN can view another user's details.
+- **Update Role**: Only ADMIN can change a user's role.
+- **User Restrictions**: Normal users cannot create other users or assign roles.

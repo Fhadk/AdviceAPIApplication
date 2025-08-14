@@ -1,59 +1,57 @@
 package com.descenedigital.model;
 
+import jakarta.persistence.*;
+import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.*;
-import lombok.*;
-
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-//Advice.java
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 public class Advice {
-@Id @GeneratedValue
-private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    public Long getId() {
+		return id;
+	}
 
-private String message;
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-@OneToMany(mappedBy = "advice", cascade = CascadeType.ALL)
-private List<Rating> ratings = new ArrayList<>();
+	public String getMessage() {
+		return message;
+	}
 
-@ManyToOne
-private User user; // Track who created the advice
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-public Long getId() {
-	return id;
-}
+	public List<Rating> getRatings() {
+		return ratings;
+	}
 
-public void setId(Long id) {
-	this.id = id;
-}
+	public void setRatings(List<Rating> ratings) {
+		this.ratings = ratings;
+	}
 
-public String getMessage() {
-	return message;
-}
+	public User getUser() {
+		return user;
+	}
 
-public void setMessage(String message) {
-	this.message = message;
-}
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-public List<Rating> getRatings() {
-	return ratings;
-}
-
-public void setRatings(List<Rating> ratings) {
-	this.ratings = ratings;
-}
-
-public User getUser() {
-	return user;
-}
-
-public void setUser(User user) {
-	this.user = user;
-}
-
-
+	@Column(nullable = false, length = 1000)
+    private String message;
+    
+    @OneToMany(mappedBy = "advice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Rating> ratings = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 }

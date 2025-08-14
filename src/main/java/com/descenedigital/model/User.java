@@ -1,39 +1,16 @@
+// User.java
 package com.descenedigital.model;
-
+import com.descendigital.enums.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import lombok.*;
 
-import Enum.Role;
-
-import java.util.Collection;
-import java.util.List;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-@Table(name = "Advice_App_Users")
+@Table(name = "users")
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@Builder
 public class User {
-    @Id
-    @GeneratedValue
-    private Long id;
-    
-    @Column(unique = true)
-    private String username;
-    
-    private String password;
-    
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
-	public Long getId() {
+    public Long getId() {
 		return id;
 	}
 
@@ -64,7 +41,16 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-    
-    
-}
 
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(unique = true, nullable = false)
+    private String username;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
+}
