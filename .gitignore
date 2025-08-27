@@ -1,4 +1,8 @@
-HELP.md
+# Compiled class files
+*.class
+bin/
+
+# Maven
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +35,28 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# HELP.md
+HELP.md
+
+# Logs
+*.log
+logs/
+
+# H2 Database
+*.mv.db
+*.trace.db
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Application properties (optional - agar aap ignore karna chahte hain)
+# application.properties

@@ -1,16 +1,32 @@
-// User.java
 package com.descenedigital.model;
-import com.descendigital.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.descendigital.enums.Role;
 
 @Entity
 @Table(name = "users")
 @Getter @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
-    public Long getId() {
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(unique = true, nullable = false)
+    private String username;
+    
+    @Column(nullable = false)
+    private String password;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
+
+	public Long getId() {
 		return id;
 	}
 
@@ -41,16 +57,5 @@ public class User {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
     
-    @Column(unique = true, nullable = false)
-    private String username;
-    
-    @Column(nullable = false)
-    private String password;
-    
-    @Enumerated(EnumType.STRING)
-    private Role role;
 }

@@ -1,19 +1,32 @@
 package com.descenedigital.model;
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Advice {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    public Long getId() {
+    @Column(nullable = false, length = 1000)
+    private String message;
+    
+    @OneToMany(mappedBy = "advice", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    @JsonIgnoreProperties({"advice", "user"}) 
+    private List<Rating> ratings = new ArrayList<>();
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"password", "ratings", "adviceList"}) 
+    private User user;
+
+	public Long getId() {
 		return id;
 	}
 
@@ -37,6 +50,18 @@ public class Advice {
 		this.ratings = ratings;
 	}
 
+	public Advice() {
+		
+	}
+
+	public Advice(Long id, String message, List<Rating> ratings, User user) {
+		super();
+		this.id = id;
+		this.message = message;
+		this.ratings = ratings;
+		this.user = user;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -44,14 +69,5 @@ public class Advice {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	@Column(nullable = false, length = 1000)
-    private String message;
     
-    @OneToMany(mappedBy = "advice", cascade = CascadeType.ALL, orphanRemoval = true)
-    @Builder.Default
-    private List<Rating> ratings = new ArrayList<>();
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User user;
 }

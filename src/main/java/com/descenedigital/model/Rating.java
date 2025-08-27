@@ -1,20 +1,30 @@
 package com.descenedigital.model;
-
-import jakarta.persistence.*;
 import lombok.*;
+import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Builder
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Rating {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
-    private int score; // 1-5
-    
-    public Long getId() {
+    public Rating() {
+		
+	}
+
+	public Rating(Long id, int score, User user, Advice advice) {
+		super();
+		this.id = id;
+		this.score = score;
+		this.user = user;
+		this.advice = advice;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -46,9 +56,14 @@ public class Rating {
 		this.advice = advice;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@Column(nullable = false)
+    private int score;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"password", "ratings"}) 
     private User user;
     
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"ratings", "user"}) 
     private Advice advice;
 }

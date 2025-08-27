@@ -67,13 +67,15 @@ public class UserController {
         @ApiResponse(responseCode = "401", description = "Unauthorized"),
         @ApiResponse(responseCode = "403", description = "Forbidden")
     })
-    public ResponseEntity<?> updateUserRole(
+    public ResponseEntity<?> updateUser(
             @Parameter(description = "ID of the user to update") @PathVariable Long id, 
             @RequestBody Map<String, String> request) {
         try {
             Role newRole = Role.valueOf(request.get("role"));
+            String name = request.get("username");
             return userRepository.findById(id)
                     .map(user -> {
+                    	user.setUsername(name);
                         user.setRole(newRole);
                         User updatedUser = userRepository.save(user);
                         return ResponseEntity.ok(updatedUser);
