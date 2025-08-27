@@ -41,6 +41,8 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    
+
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Get user by ID", description = "Retrieve a specific user by ID (Admin only)")
