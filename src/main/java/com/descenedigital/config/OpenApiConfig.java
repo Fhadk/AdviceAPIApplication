@@ -19,6 +19,6 @@ public class OpenApiConfig {
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Project GitHub")
-                        .url("https://github.com/your-repo-url"));
+                        .url("https://github.com/HamdiaNouman-22/AdviceAPIApplication.git"));
     }
 }
