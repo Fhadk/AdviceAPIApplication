@@ -65,6 +65,12 @@ Feel free to go beyond these suggestions if you have ideas that improve the appl
 
 ## 🚀 Submission Instructions
 
-- Please make sure to implement your enhancements.
-- Update this README.md to explain your changes and decisions.
-- Create a branch and make a pull request.
+- Please make sure to implement your enhancements
+- Implement Swagger
+- TestCase coverage >= 80%
+- Instructions on how to run the code
+- Update this README.md to explain your changes and decisions
+- Fork this repo, create a branch, and make a pull request
+
+## 🚀 AI Code
+- AI code snippet will not be accepted and auto auto-rejected. 
